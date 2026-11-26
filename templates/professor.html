@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Comum</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</head>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Painel <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/loja">Loja</a>
+      </li>
+
+<!--    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+  </div>
+</nav>
+
+
+
+<body class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Painel Usuário Comum - Bem-vindo, {{ nome }}. </h2>
+        <a href="/logout" class="btn btn-outline-danger">Sair</a>
+    </div>
+
+    <div class="card p-3 shadow-sm mb-4">
+        <h4>Minhas Informações</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Perfil</th>
+                        <th>⚙️</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ id }}</td>
+                        <td><b>{{ nome }}</b></td>
+                        <td>{{ email }}</td>
+                        <td><span class="badge bg-secondary">comum</span></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                    <button class="dropdown-item" data-toggle="modal"
+                                        data-target="#exampleModalCenter">Alterar dados</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Alterar seu nome ou email</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <div class="card p-3 shadow-sm mb-4">
+                                <form method="POST">
+                                    <input type="hidden" name="acao" value='atualizar_DadosComum'>
+
+                                    <input type="hidden" name="id" placeholder="Id" value="{{ id }}">
+                                    <input type="text" name="nome" placeholder="Nome" class="form-control mb-2" required>
+                                    <input type="email" name="email" placeholder="E-mail" class="form-control mb-2" required>
+
+
+                                    <button class="btn btn-success w-50" style="position: relative; left: 50%;">Salvar
+                                        Usuário</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button data-toggle="modal" data-target="#confirmardeleteconta" class="btn btn-outline-danger "
+        style="position: fixed; bottom: 5%; right: 13%;">Deletar Sua conta</button>
+
+
+    <div class="modal fade" id="confirmardeleteconta" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Tem certeza de que dejesa deletar sua conta?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+
+                        <form method="POST">
+                            <input type="hidden" name="acao" value='DeletarContacomum'>
+
+                            <input type="hidden" name="id" placeholder="id" value="{{ id }}">
+
+                            <button class="btn btn-outline-danger">Deletar minha Conta</button>
+                        </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>

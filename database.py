@@ -7,6 +7,7 @@ def conectar():
     except Error as e:
         print(e)
         return None
+    
 ################TABELA USUÁRIO
 def criar_tabela_usuarios():
     
@@ -37,6 +38,7 @@ def criar_tabela_usuarios():
 
     finally:
         conn.close()
+
 ###############TABELA CURSOS
 def criar_tabela_cursos():
     conn = conectar()
@@ -105,6 +107,7 @@ def criar_tabela_horarios():
     finally:
         # Fecha a conexão com o banco
         conn.close()
+
 ###########TABELA MATRICULA
 def criar_tabela_matriculas():
     conn = conectar()
@@ -168,6 +171,7 @@ def cadastrar_usuarios(nome, email, senha, perfil, matricula):
 
     finally:
         conn.close()
+
 def listar_usuarios():
         conn = conectar()
         cursor = conn.cursor()
@@ -263,20 +267,119 @@ def deletar_cursos(id_cursos):
 def listar_cursos():
     conn = conectar()
 
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nome, carga_horaria, professor_id FROM cursos")
+    cursos = cursor.fetchall()
+    conn.close()
+    return cursos
+
+
+##########################################
+
+
+
+
+### acesso aos dados do banco de dados
+def autenticar_usuario(email,senha):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nome, email, perfil FROM usuarios WHERE email = ? and senha=?", (email,senha))
+    dados = cursor.fetchone()
+    conn.close()
+    return dados # retorna dados se o usuário for encontrado, caso contrário retorna None
+
+
+def cadastrar_usuario(nome, email, senha, perfil):
     try:
+        conn = conectar()
         cursor = conn.cursor()
-
-        cursor.execute("""
-            SELECT id, nome, carga_horaria, professor_id
-            FROM cursos
-        """)
-
-        cursos = cursor.fetchall()
-
-        return cursos
-
-    except Error as erro:
-        print("Erro ao listar cursos:", erro)
+        cursor.execute("INSERT INTO usuarios (nome, email, senha, perfil) VALUES (?, ?, ?, ?)", (nome, email, senha, perfil))
+        conn.commit()
+        return True
+    except Exception:
+        return False
     finally:
         conn.close()
 
+    
+def listar_usuarios():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nome, email, perfil FROM usuarios")
+    usuarios = cursor.fetchall()
+    conn.close()
+    return usuarios  # Retorna a lista de usuários
+
+
+def deletar_usuario(id_usuario): 
+    try:
+        conn = conectar()
+        cursor = conn.cursor() 
+        cursor.execute("DELETE FROM usuarios WHERE id = ?", (id_usuario,))
+        conn.commit()
+        return True
+    except Exception:
+        return False
+    finally:
+        conn.close()
+
+def atualizar_usuario(id_usuario, nome, email, senha, perfil):
+    conn = conectar()
+    cursor = conn.cursor()
+    if senha=="":
+        try:
+            cursor.execute("UPDATE usuarios SET nome = ?, email = ?, perfil = ? WHERE id = ?", (nome, email, perfil, id_usuario))
+            conn.commit()
+            return True
+        except Exception:
+            return False
+        finally:
+            conn.close()
+    else:
+        try:
+            cursor.execute("UPDATE usuarios SET nome = ?, email = ?, senha = ?, perfil = ? WHERE id = ?", (nome, email, senha, perfil, id_usuario))
+            conn.commit()
+            return True
+        except Exception:
+            return False
+        finally:
+            conn.close()
+
+def encontrar_usuario_por_id(id_usuario):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nome, email, perfil FROM usuarios WHERE id = ?", (id_usuario,))
+    usuario = cursor.fetchone()
+    conn.close()
+    return usuario  # Retorna o usuário encontrado ou None se não encontrado
+
+def alterar_NomeEmail(id_usuario, nome, email):
+    conn = conectar()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("UPDATE usuarios SET nome = ?, email = ? WHERE id = ?", (nome, email, id_usuario))
+        conn.commit()
+        return True
+    except Exception:
+        return False
+    finally:
+        conn.close()
+
+
+
+
+### dados iniciais do banco de dados
+def preencher_dados_iniciais():
+    
+    try:
+        conn = conectar()
+        cursor = conn.cursor()
+        cursor.execute("INSERT OR IGNORE INTO usuarios (id, nome, email, senha, perfil, matricula) VALUES (1, 'Admin', 'admin@admin.com', 'admin', 'admin', 1" ")")
+        cursor.execute("INSERT OR IGNORE INTO usuarios (id, nome, email, senha, perfil, matricula) VALUES (1, 'Admin', 'admin@admin.com', 'admin', 'admin', 1" ")")
+        cursor.execute("INSERT OR IGNORE INTO cursos (id, nome, carga_horaria, professor_id) VALUES (1, 'Desenvolvimento Web', 60, 1)")
+        conn.commit()
+    except Error as e:
+        print(e)                 
+    finally:
+        if conn:
+            conn.close()
