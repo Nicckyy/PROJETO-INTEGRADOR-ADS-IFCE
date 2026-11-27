@@ -1,0 +1,66 @@
+*CURSOS:  
+Desenvolvimento Web
+Programação em Python
+Banco de Dados
+Redes de Computadores
+Segurança da Informação
+Inglês Instrumental para Tecnologia
+Produção de Conteúdo Digital
+Desenvolvimento Mobile
+Inteligência Artificial para Negócios.
+
+*controle de usuários: 
+cursos, matrículas e notas dos alunos, além de oferecer diferentes níveis de acesso de acordo com o perfil de cada usuário autenticado.
+
+*Os alunos poderão: 
+visualizar os cursos nos quais estão matriculados
+consultar suas quatro notas em cada curso
+visualizar a média final obtida
+verificar sua situação no curso podendo estar aprovados, reprovados ou cursando.
+
+\\poderão consultar informações básicas relacionadas ao curso e ao professor responsável.
+
+*Os professores:
+poderão visualizar os cursos pelos quais são responsáveis
+consultar os alunos matriculados nesses cursos
+cadastrar as notas dos alunos
+alterar notas já registradas
+calcular automaticamente a média final dos estudantes e verificar a situação final de cada aluno
+
+//Cada curso deverá possuir um único professor responsável.
+
+*Os usuários administrativos:
+
+poderão cadastrar alunos, professores e cursos
+visualizar informações relacionadas a essas entidades, bem como editar essas informações.
+Também poderão remover alunos, professores e cursos do sistema
+realizar matrículas de alunos em cursos
+consultar os alunos matriculados em cada curso ofertado. 
+
+//O setor administrativo será responsável ainda pela criação das credenciais de acesso dos usuários.
+
+*Cada curso ofertado pela Fourth Weather Educacional:
+deverá possuir informações como 
+nome
+descrição
+carga horária
+professor responsável
+lista de alunos matriculados.
+
+Um mesmo curso poderá possuir vários alunos matriculados, e um aluno poderá participar de vários cursos diferentes simultaneamente, desde que não haja choque de horários.
+
+*No processo de avaliação, cada aluno matriculado em um curso deverá possuir quatro notas obrigatórias: 
+
+Três notas dizem respeito a atividades e a quarta nota a um trabalho final. Para cálculo da nota final do curso é utilizada média ponderada, com as atividades possuindo peso 1 e o trabalho final peso 2.  O sistema deve calcular automaticamente a média com base nas notas inseridas. Os alunos que obtiverem média maior ou igual a 7,0 deverão ser considerados aprovados, enquanto aqueles com média inferior a 7,0 deverão ser considerados reprovados.
+
+
+
+*O sistema deverá: 
+
+possuir controle de acesso baseado no perfil do usuário autenticado. Dessa forma, alunos não poderão alterar notas, professores não poderão cadastrar usuários administrativos e usuários administrativos não poderão lançar notas de alunos. 
+
+Cada perfil deverá possuir acesso apenas às funcionalidades relacionadas às suas responsabilidades dentro da instituição.
+
+A aplicação poderá ser executada diretamente pelo programa ou por meio do terminal. A interface do sistema deverá ser simples, organizada e de fácil utilização, contendo menus, mensagens explicativas, opções de navegação e avisos de sucesso ou erro nas operações realizadas. O principal objetivo da Fourth Weather Educacional é possuir um sistema funcional e organizado que permita informatizar seus processos acadêmicos básicos, melhorando o controle de cursos, usuários, matrículas e avaliações.
+
+
