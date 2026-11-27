@@ -38,7 +38,7 @@
                     <a class="nav-link" href="/alunos">Alunos</a>
                 </li>
             </ul>
-             <a href="/logout" class="btn btn-outline-danger">Sair</a>
+            <a href="/logout" class="btn btn-outline-danger">Sair</a>
         </div>
     </nav>
 </head>
@@ -97,6 +97,9 @@
                                         data-target="#exampleModalCenter">Alterar dados</button>
 
 
+                                    <button class="dropdown-item" data-toggle="modal"
+                                        data-target="#CadastrarNoCurso">Matricular Aluno</button>
+
 
 
                                     <form method="post">
@@ -127,11 +130,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
-
                                     <div class="card p-3 shadow-sm mb-4">
                                         <form method="POST">
-                                            <input type="hidden" name="acao" value="atualizar_usuario">
+                                            <input type="hidden" name="acao" value="atualizar_curso">
                                             <input type="number" name="id" placeholder="id" class="form-control mb-2"
                                                 required>
                                             <input type="text" name="nome" placeholder="Nome" class="form-control mb-2"
@@ -148,6 +149,40 @@
                                                 style="position: relative; left: 50%;">Salvar Usuário</button>
                                         </form>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="CadastrarNoCurso" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle"> Matricular Aluno através do ID
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card p-3 shadow-sm mb-4">
+                                        <form method="POST">
+                                            <input type="hidden" name="acao" value="Matricular_aluno">
+                                            <input type="number" name="id" placeholder="id" class="form-control mb-2"
+                                                required>
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">{{  }}</div>
+                                            </div>
+
+
+                                            <button class="btn btn-success w-50"
+                                                style="position: relative; left: 50%;">Matricular aluno</button>
+                                        </form>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

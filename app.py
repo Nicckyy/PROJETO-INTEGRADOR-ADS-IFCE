@@ -45,7 +45,7 @@ def painel_admin():
 @app.route('/admin_cursos', methods=['GET', 'POST'])
 def admin_cursos():
     if session.get('user_perfil') != 'admin': return redirect(url_for('login'))
-    
+    erro = None
     if request.method == 'POST':
         acao = request.form.get('acao')
         if acao == 'cadastrar_curso':
@@ -57,9 +57,24 @@ def admin_cursos():
         elif acao == 'atualizar_curso':
             Curso.atualizar_curso(request.form['id'],request.form['nome'], request.form['carga_horaria'], request.form['professor_id'])
 
+        
+        elif acao == 'matricular_aluno':
+            usuario = Usuario.autenticar(request.form.get('email'), request.form.get('senha'))
+            if usuario:
+                session['user_id'] = usuario.id
+                session['user_nome'] = usuario.nome
+                session['user_email'] = usuario.email
+                session['user_perfil'] = usuario.perfil
+                    
+                if usuario.perfil == 'admin': return redirect(url_for('painel_admin')) 
+                elif usuario.perfil == 'aluno': return redirect(url_for('painel_alunos'))
+            else:
+                erro = "E-mail ou senha incorretos."
+            return render_template('login.html', erro=erro)
     cursos = Curso.listar_cursos()
+    alunos = Aluno.listar_alunos()
 
-    return render_template('administrarcursos.html', cursos=cursos, nome=session.get('user_nome'), id = session.get('user_id'))
+    return render_template('administrarcursos.html', cursos=cursos, alunos= alunos, nome=session.get('user_nome'), id = session.get('user_id'))
 
 @app.route('/admin_professores', methods=['GET', 'POST'])
 def admin_professores():

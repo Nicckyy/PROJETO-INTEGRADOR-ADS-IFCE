@@ -26,6 +26,7 @@ def criar_tabela_usuarios():
                 email TEXT NOT NULL UNIQUE,
                 senha TEXT NOT NULL,
                 perfil TEXT NOT NULL,
+                
                 matricula INTEGER UNIQUE
             )
         """)
