@@ -83,3 +83,30 @@ class Curso:
 
     def atualizar_curso(id_curso):
         pass
+
+
+class Matricula:
+    def __init__(self, id_matricula, aluno_id, curso_id, Nota1, Nota2, Nota3, Nota4):
+        self.id = id_matricula
+        self.aluno_id = aluno_id #FK 
+        self.curso_id = curso_id #FK
+        self.Nota1 = Nota1
+        self.Nota2 = Nota2
+        self.Nota3 = Nota3
+        self.Nota4 = Nota4
+
+    @staticmethod
+    def listar_matriculas():
+        matriculas = db.listar_matriculas()
+        return [Matricula(id_m, aluno_id, curso_id, Nota1, Nota2, Nota3, Nota4) for id_m, aluno_id, curso_id, Nota1, Nota2, Nota3, Nota4 in matriculas]
+
+    
+    def matricular_aluno(id_usuario):
+        Erro = None
+        dados = db.encontrar_usuario_por_id(id_usuario)
+        if dados:
+            Matricular = db.matricular_aluno
+            return [Matricula()]
+            
+        else: return Erro
+        

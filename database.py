@@ -26,6 +26,7 @@ def criar_tabela_usuarios():
                 email TEXT NOT NULL UNIQUE,
                 senha TEXT NOT NULL,
                 perfil TEXT NOT NULL,
+                
                 matricula INTEGER UNIQUE
             )
         """)
@@ -54,6 +55,7 @@ def criar_tabela_cursos():
                 nome TEXT NOT NULL,
                 carga_horaria INTEGER NOT NULL,
                 professor_id INTEGER NOT NULL,
+
 
                 FOREIGN KEY (professor_id)
                 REFERENCES usuarios(id)
@@ -218,6 +220,14 @@ def listar_cursos():
     conn.close()
     return cursos
 
+def listar_matriculas():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, aluno_id, curso_id, N1, N2, N3, N4 FROM matriculas")
+    matriculas = cursor.fetchall()
+    conn.close()
+    return matriculas
+
 
 ##########################################
 
@@ -245,6 +255,8 @@ def cadastrar_usuario(nome, email, senha, perfil, matricula):
         return False
     finally:
         conn.close()
+
+def matricular_aluno
 
     
 def listar_usuarios():
@@ -290,13 +302,13 @@ def atualizar_usuario(id_usuario, nome, email, senha, perfil):
         finally:
             conn.close()
 
-def encontrar_usuario_por_id(id_usuario):
-    conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("SELECT id, nome, email, perfil FROM usuarios WHERE id = ?", (id_usuario,))
-    usuario = cursor.fetchone()
-    conn.close()
-    return usuario  # Retorna o usuário encontrado ou None se não encontrado
+#def encontrar_usuario_por_id(id_usuario):
+#    conn = conectar()
+#    cursor = conn.cursor()
+ #   cursor.execute("SELECT id, nome, email, perfil FROM usuarios WHERE id = ?", (id_usuario,))
+ #   usuario = cursor.fetchone()
+#    conn.close()
+#    return usuario  # Retorna o usuário encontrado ou None se não encontrado
 
 def alterar_NomeEmail(id_usuario, nome, email):
     conn = conectar()

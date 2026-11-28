@@ -38,7 +38,7 @@
                     <a class="nav-link" href="/alunos">Alunos</a>
                 </li>
             </ul>
-             <a href="/logout" class="btn btn-outline-danger">Sair</a>
+            <a href="/logout" class="btn btn-outline-danger">Sair</a>
         </div>
     </nav>
 </head>
@@ -69,6 +69,7 @@
     <div class="card p-3 shadow-sm mb-4">
         <h4>Cursos cadastrados</h4>
         <div class="table-responsive">
+
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
@@ -97,7 +98,11 @@
                                         data-target="#exampleModalCenter">Alterar dados</button>
 
 
+                                    <button class="dropdown-item" data-toggle="modal"
+                                        data-target="#CadastrarNoCurso">Matricular Aluno</button>
 
+                                    <button class="dropdown-item" data-toggle="modal"
+                                        data-target="#ListarMatriculados">Acessar lista de matriculados</button>
 
                                     <form method="post">
                                         <input type="hidden" name="acao" value="deletar_curso">
@@ -108,52 +113,122 @@
                                         </button>
                                     </form>
                                 </div>
+
+
                             </div>
-                            </span>
-                        </td>
-                    </tr>
+
+                </tbody>
+
+
+                </span>
+                </td>
+                </tr>
 
 
 
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Alterar dados do Usuário através
-                                        do id</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-
-
-                                    <div class="card p-3 shadow-sm mb-4">
-                                        <form method="POST">
-                                            <input type="hidden" name="acao" value="atualizar_usuario">
-                                            <input type="number" name="id" placeholder="id" class="form-control mb-2"
-                                                required>
-                                            <input type="text" name="nome" placeholder="Nome" class="form-control mb-2"
-                                                required>
-                                            <input type="email" name="email" placeholder="E-mail"
-                                                class="form-control mb-2" required>
-                                            <input type="password" name="senha" placeholder="Senha"
-                                                class="form-control mb-2" required>
-                                            <select name="perfil" class="form-control mb-2">
-                                                <option value="comum">Comum</option>
-                                                <option value="admin">Administrador</option>
-                                            </select>
-                                            <button class="btn btn-success w-50"
-                                                style="position: relative; left: 50%;">Salvar Usuário</button>
-                                        </form>
-                                    </div>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Alterar dados do Usuário através
+                                    do id</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card p-3 shadow-sm mb-4">
+                                    <form method="POST">
+                                        <input type="hidden" name="acao" value="atualizar_curso">
+                                        <input type="number" name="id" placeholder="id" class="form-control mb-2"
+                                            required>
+                                        <input type="text" name="nome" placeholder="Nome" class="form-control mb-2"
+                                            required>
+                                        <input type="email" name="email" placeholder="E-mail" class="form-control mb-2"
+                                            required>
+                                        <input type="password" name="senha" placeholder="Senha"
+                                            class="form-control mb-2" required>
+                                        <select name="perfil" class="form-control mb-2">
+                                            <option value="comum">Comum</option>
+                                            <option value="admin">Administrador</option>
+                                        </select>
+                                        <button class="btn btn-success w-50"
+                                            style="position: relative; left: 50%;">Salvar
+                                            Usuário</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
-                </tbody>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="CadastrarNoCurso" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle"> Matricular Aluno através do ID
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card p-3 shadow-sm mb-4">
+                                    <form method="POST">
+                                        <input type="hidden" name="acao" value="Matricular_aluno">
+                                        <input type="number" name="id" placeholder="id" class="form-control mb-2"
+                                            required>
+                                        <br>
+
+
+                                        <button class="btn btn-success w-50"
+                                            style="position: relative; left: 50%;">Matricular
+                                            aluno</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="ListarMatriculados" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Alterar dados do Usuário através
+                                    do id</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card p-3 shadow-sm mb-4">
+
+                                    {% for m in matriculados %}
+
+                                    <h1>filhadaputa</h1>
+                                    
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                {% endfor %}
+
             </table>
+
         </div>
     </div>
 

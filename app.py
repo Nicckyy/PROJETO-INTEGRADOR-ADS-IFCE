@@ -45,7 +45,8 @@ def painel_admin():
 @app.route('/admin_cursos', methods=['GET', 'POST'])
 def admin_cursos():
     if session.get('user_perfil') != 'admin': return redirect(url_for('login'))
-    
+    erro = None
+
     if request.method == 'POST':
         acao = request.form.get('acao')
         if acao == 'cadastrar_curso':
@@ -57,9 +58,15 @@ def admin_cursos():
         elif acao == 'atualizar_curso':
             Curso.atualizar_curso(request.form['id'],request.form['nome'], request.form['carga_horaria'], request.form['professor_id'])
 
-    cursos = Curso.listar_cursos()
+        elif acao == 'Matricular_aluno':
+            Matricula.Matricular_aluno(request.form['id'])
 
-    return render_template('administrarcursos.html', cursos=cursos, nome=session.get('user_nome'), id = session.get('user_id'))
+
+
+    cursos = Curso.listar_cursos()
+    matriculados = Matricula.listar_matriculas()
+
+    return render_template('administrarcursos.html', cursos=cursos, matriculados= matriculados, nome=session.get('user_nome'), id = session.get('user_id'))
 
 @app.route('/admin_professores', methods=['GET', 'POST'])
 def admin_professores():
